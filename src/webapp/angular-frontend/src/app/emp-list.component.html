@@ -26,7 +26,9 @@
       </form>
     </div>
     <ul class="emp-list">
-      <li *ngFor="let employee of employees">
+      <div>
+        <input id="employee-search" type="text" [(ngModel)]="term" placeholder="Type search term...">
+      <li *ngFor="let employee of employees | filter: term">
         <div class="employee-row" *ngIf="!editing || editingEmployee.id != employee.id">
             <span class="employee-firstName">
               {{employee.firstName}} &nbsp;
@@ -58,6 +60,7 @@
             </span>
         </div>
       </li>
+      </div>
     </ul>
     <div class="no-employees" *ngIf="employees && employees.length == 0">
         <p>No employees Found!</p>
