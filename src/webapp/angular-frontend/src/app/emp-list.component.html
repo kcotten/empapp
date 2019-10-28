@@ -1,0 +1,65 @@
+<div class="employee-content">
+    <h1 class="page-title">Employees</h1>
+    <div class="employee-create">
+      <form #employeeForm="ngForm" (ngSubmit)="createEmployee(employeeForm)" novalidate>
+        <input type="text" id="firstName" class="form-control" placeholder="Type First Name..." 
+               required
+               name="firstName" [(ngModel)]="newEmployee.firstName"
+               #title="ngModel" >
+        <!-- <div *ngIf="firstName.errors && firstName.dirty"
+             class="alert alert-danger">
+            <div [hidden]="!firstName.errors.required">
+              First Name is required.
+            </div>
+        </div> -->
+        <input type="text" id="lastName" class="form-control" placeholder="Type Last Name..." 
+               required
+               name="lastName" [(ngModel)]="newEmployee.lastName"
+               #title="ngModel" >
+        <!-- <div *ngIf="lastName.errors && lastName.dirty"
+             class="alert alert-danger">
+            <div [hidden]="!lastName.errors.required">
+              Last Name is required.
+            </div> 
+        </div> -->
+        <input type="submit">
+      </form>
+    </div>
+    <ul class="emp-list">
+      <li *ngFor="let employee of employees">
+        <div class="employee-row" *ngIf="!editing || editingEmployee.id != employee.id">
+            <span class="employee-firstName">
+              {{employee.firstName}} &nbsp;
+            </span>
+            <span class="employee-lastName">
+              {{employee.lastName}}
+            </span>
+            <span class="employee-actions">
+                <a (click)="editEmployee(employee)">
+                  <i class="material-icons edit">edit</i>
+                </a>
+                <a (click)="deleteEmployee(employee.id)">
+                  <i class="material-icons delete">clear</i>
+                </a>
+            </span>
+        </div>
+        <div class="employee-edit" *ngIf="editing && editingEmployee.id === employee.id">
+            <input class="form-control" type="text"
+             [(ngModel)]="editingEmployee.firstName" required>
+            <input class="form-control" type="text"
+             [(ngModel)]="editingEmployee.lastName" required>            
+            <span class="edit-actions">
+                <a (click)="updateEmployee(editingEmployee)">
+                  <i class="material-icons">done</i>
+                </a>
+                <a (click)="clearEditing()">
+                  <i class="material-icons">clear</i>
+                </a>
+            </span>
+        </div>
+      </li>
+    </ul>
+    <div class="no-employees" *ngIf="employees && employees.length == 0">
+        <p>No employees Found!</p>
+    </div>
+</div>
