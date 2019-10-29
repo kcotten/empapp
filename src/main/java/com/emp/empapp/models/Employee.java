@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+//import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="employee")
@@ -16,12 +16,11 @@ public class Employee {
 
     @NotBlank
     @Size(max=100)
-    @Indexed(unique=true)
+    //@Indexed(unique=true)
     private String firstName;
 
     @NotBlank
     @Size(max=100)
-    @Indexed(unique=true)
     private String lastName;
 
     private Date createdAt = new Date();
