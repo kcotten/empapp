@@ -13,6 +13,7 @@ export class EmpListComponent implements OnInit {
   newEmployee: Employee = new Employee;
   editing: boolean = false;
   editingEmployee: Employee = new Employee;
+  term: "";
 
   constructor(
     private employeService: EmployeeService,
