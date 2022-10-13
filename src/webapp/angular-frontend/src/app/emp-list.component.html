@@ -22,14 +22,14 @@
               Last Name is required.
             </div> 
         </div> -->
-        <input type="submit">
+        <input type="submit" value="Create">
       </form>
     </div>
     <ul class="emp-list">
       <div>
         <input id="employee-search" type="text" [(ngModel)]="term" placeholder="Type search term...">
       <li *ngFor="let employee of employees | filter: term">
-        <div class="employee-row" *ngIf="!editing || editingEmployee.id != employee.id">
+        <div class="employee-row" *ngIf="!editing || editingEmployee.id !== employee.id">
             <span class="employee-firstName">
               {{employee.firstName}} &nbsp;
             </span>
@@ -62,7 +62,7 @@
       </li>
       </div>
     </ul>
-    <div class="no-employees" *ngIf="employees && employees.length == 0">
+    <div class="no-employees" *ngIf="employees && employees.length === 0">
         <p>No employees Found!</p>
     </div>
 </div>
