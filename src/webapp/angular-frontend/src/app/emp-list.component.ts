@@ -4,7 +4,7 @@ import { Employee } from './employee';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'emp-list',
+  selector: 'app-emp-list',
   templateUrl: './emp-list.component.html'
 })
 
@@ -17,7 +17,7 @@ export class EmpListComponent implements OnInit {
 
   constructor(
     private employeService: EmployeeService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getEmployee();
@@ -25,13 +25,13 @@ export class EmpListComponent implements OnInit {
 
   getEmployee(): void {
     this.employeService.getEmployee()
-      .then(emps => this.employees = emps );
+      .then(emps => this.employees = emps);
     console.log();
   }
 
   createEmployee(employeeForm: NgForm): void {
     this.employeService.createEmployee(this.newEmployee)
-      .then(createEmployee => {        
+      .then(createEmployee => {
         employeeForm.reset();
         this.newEmployee = new Employee();
         this.employees.unshift(createEmployee)
@@ -40,19 +40,19 @@ export class EmpListComponent implements OnInit {
 
   deleteEmployee(id: string): void {
     this.employeService.deleteEmployee(id)
-    .then(() => {
-      this.employees = this.employees.filter(employee => employee.id != id);
-    });
+      .then(() => {
+        this.employees = this.employees.filter(employee => employee.id != id);
+      });
   }
 
   updateEmployee(employeeData: Employee): void {
     console.log(employeeData);
     this.employeService.updateEmployee(employeeData)
-    .then(updatedEmployee => {
-      let existingEmployee = this.employees.find(employee => employee.id === updatedEmployee.id);
-      Object.assign(existingEmployee, updatedEmployee);
-      this.clearEditing();
-    });
+      .then(updatedEmployee => {
+        let existingEmployee = this.employees.find(employee => employee.id === updatedEmployee.id);
+        Object.assign(existingEmployee, updatedEmployee);
+        this.clearEditing();
+      });
   }
   /*
   toggleCompleted(employeeData: Employee): void {

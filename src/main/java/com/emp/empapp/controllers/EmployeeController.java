@@ -19,28 +19,29 @@ public class EmployeeController {
 
     @GetMapping("/emps")
     public List<Employee> getAllEmployee() {
-        //List<Task> passengers = taskRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
-        //Sort sortByCreatedAtDesc = new Sort.by(Sort.Direction.DESC, "createdAt");
-        //return taskRepository.findAll(sortByCreatedAtDesc);
+        // List<Task> passengers = taskRepository.findAll(Sort.by(Sort.Direction.DESC,
+        // "createdAt"));
+        // Sort sortByCreatedAtDesc = new Sort.by(Sort.Direction.DESC, "createdAt");
+        // return taskRepository.findAll(sortByCreatedAtDesc);
         return eRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     @PostMapping("/emps")
     public Employee createEmployee(@Valid @RequestBody Employee emp) {
-        //emp.setCompleted(false);
+        // emp.setCompleted(false);
         return eRepository.save(emp);
     }
 
-    @GetMapping(value="/emps/{id}")
+    @GetMapping(value = "/emps/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") String id) {
         return eRepository.findById(id)
                 .map(emp -> ResponseEntity.ok().body(emp))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping(value="/emps/{id}")
+    @PutMapping(value = "/emps/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable("id") String id,
-                                           @Valid @RequestBody Employee emp) {
+            @Valid @RequestBody Employee emp) {
         return eRepository.findById(id)
                 .map(empData -> {
                     empData.setFirstName(emp.getFirstName());
@@ -50,7 +51,7 @@ public class EmployeeController {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping(value="/emps/{id}")
+    @DeleteMapping(value = "/emps/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") String id) {
         return eRepository.findById(id)
                 .map(emp -> {
